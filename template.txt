@@ -1,0 +1,15 @@
+prompt: BEGINNING AT A 2" GALVANIZED IRON PIPE FOUND AT THE INTERSECTION OF THE NORTH RIGHT-OF-WAY LINE OF HOLLINGSWORTH STREET (A VARIABLE WIDTH ROW) AND BEING THE SOUTHEAST CORNER OF LOT 5 BLOCK 5 OF SAID MORGANS ADDITION;
+completion:
+locationDescription: BEGINNING
+callType: point
+bearing: None
+description: None
+distance: None
+unit: None
+angle: None
+monument: A 2" GALVANIZED IRON PIPE FOUND AT THE INTERSECTION OF THE NORTH RIGHT-OF-WAY LINE OF HOLLINGSWORTH STREET (A VARIABLE WIDTH ROW) AND BEING THE SOUTHEAST CORNER OF LOT 5 BLOCK 5 OF SAID MORGANS ADDITION
+pointOfReference: None
+
+Can you please return the above information in the format below
+-------------------------
+{"prompt":"COMMENCING at a point, (from which a found 1/2 inch iron rod bears South 31 degrees 32 minutes 08 seconds West,a distance of 0.22 feet) , on the existing west right-of-way line of North Richmond Road  (US Highway 59), being the northeast corner of Lot 30 of the Blasingame Addition of which is recorded in Volume 222, Page 637 of the Wharton County Deed Records;","completion":"{\"segments\":[{\"locationDescription\":\"COMMENCING\",\"callType\":\"point\",\"bearing\":null,\"description\":null,\"distance\":null,\"unit\":null,\"angle\":null,\"monument\":\"a point on the existing west right-of-way line of North Richmond Road  (US Highway 59), being the northeast corner of Lot 30 of the Blasingame Addition of which is recorded in Volume 222, Page 637 of the Wharton County Deed Records\",\"pointOfReference\":{\"bearing\":\"S 31° 32' 08\\\" W\",\"distance\":0.22,\"unit\":\"feet\",\"monument\":\"a found 1/2\\\" iron rod\"}}]}"}

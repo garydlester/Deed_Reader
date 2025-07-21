@@ -1,0 +1,715 @@
+{
+  "segments": [
+    {
+      "locationDescription": "BEGINNING",
+      "callType": "line",
+      "bearing": null,
+      "description": null,
+      "distance": null,
+      "unit": null,
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND AT THE INTERSECTION OF THE NORTH RIGHT-OF-WAY LINE OF HOLLINGSWORTH STREET (A VARIABLE WIDTH RIGHT-OF-WAY) WITH THE WEST RIGHT-OF-WAY LINE OF BRAZOS STREET (A CALLED 50' WIDE RIGHT-OF-WAY), AND BEING THE SOUTHEAST CORNER OF LOT 5, BLOCK 5 (239) OF SAID MORGAN'S ADDITION",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 76°36'01\" WEST",
+      "description": "ALONG THE SOUTH LINE OF SAID BLOCK 5 AND THE NORTH RIGHT-OF-WAY LINE OF SAID HOLLINGSWORTH STREET",
+      "distance": 279.66,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": {
+        "bearing": "SOUTH 76°36'01\" WEST",
+        "distance": 20.0,
+        "unit": "FEET",
+        "monument": "RAILROAD SPIKE FOUND"
+      }
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 13°20'09\" WEST",
+      "description": "DEPARTING THE NORTH RIGHT-OF-WAY LINE OF SAID HOLLINGSWORTH STREET",
+      "distance": 150.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 76°39'51\" WEST",
+      "description": null,
+      "distance": 20.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 13°20'09\" WEST",
+      "description": null,
+      "distance": 155.22,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "FENCE CORNER",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 76°21'28\" WEST",
+      "description": null,
+      "distance": 158.18,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": {
+        "bearing": "NORTH 13°38'32\" WEST",
+        "distance": 97.66,
+        "unit": "FEET",
+        "monument": "1-1/2\" IRON PIPE FOUND"
+      }
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 88°20'24\" WEST",
+      "description": null,
+      "distance": 410.04,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "1/2\" IRON ROD FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 20°30'06\" WEST",
+      "description": null,
+      "distance": 266.71,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" ALUMINUM DISK STAMPED \"WIER & ASSOC INC\" FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": "BEGINNING OF A CURVE TO THE RIGHT",
+      "callType": "curve",
+      "bearing": "NORTH 16°54'43\" WEST",
+      "description": null,
+      "distance": 48.63,
+      "unit": "FEET",
+      "angle": "07°10'46\"",
+      "monument": "60D NAIL FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 13°19'21\" WEST",
+      "description": null,
+      "distance": 429.37,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND (DISTURBED)",
+      "pointOfReference": {
+        "bearing": "SOUTH 77°52' W",
+        "distance": 4.0,
+        "unit": "FEET",
+        "monument": "2\" ALUMINUM DISK STAMPED \"WIER & ASSOC INC\" FOUND"
+      }
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 15°19'13\" WEST",
+      "description": null,
+      "distance": 279.38,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" ALUMINUM DISK STAMPED \"WIER & ASSOC INC\" FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": "BEGINNING OF A NON- TANGENT CURVE TO THE LEFT",
+      "callType": "curve",
+      "bearing": null,
+      "description": null,
+      "distance": 113.78,
+      "unit": "FEET",
+      "angle": "01°21'24\"",
+      "monument": null,
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 21°58'09\" WEST",
+      "description": null,
+      "distance": 113.78,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 22°38'51\" WEST",
+      "description": null,
+      "distance": 445.52,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": "BEGINNING OF A CURVE TO THE RIGHT",
+      "callType": "curve",
+      "bearing": "NORTH 18°37'03\" WEST",
+      "description": null,
+      "distance": 87.03,
+      "unit": "FEET",
+      "angle": "08°08'40\"",
+      "monument": "2\" GALVANIZED PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 14°29'11\" WEST",
+      "description": null,
+      "distance": 596.86,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": "BEGINNING OF A CURVE TO THE LEFT",
+      "callType": "curve",
+      "bearing": "NORTH 17°40'42\" WEST",
+      "description": null,
+      "distance": 66.16,
+      "unit": "FEET",
+      "angle": "06°11'21\"",
+      "monument": "1\" IRON PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 20°34'04\" WEST",
+      "description": null,
+      "distance": 97.37,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "1/2\" IRON ROD FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": "BEGINNING OF A CURVE TO THE RIGHT",
+      "callType": "curve",
+      "bearing": "NORTH 17°01'21\" WEST",
+      "description": null,
+      "distance": 75.35,
+      "unit": "FEET",
+      "angle": "07°15'48\"",
+      "monument": "2\" GALVANIZED PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 76°36'33\" WEST",
+      "description": null,
+      "distance": 36.83,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": {
+        "bearing": "SOUTH 76°36'33\" WEST",
+        "distance": 5.0,
+        "unit": "FEET",
+        "monument": "2\" ALUMINUM DISK STAMPED \"WIER & ASSOC INC\" FOUND"
+      }
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 13°22'47\" WEST",
+      "description": null,
+      "distance": 1269.3,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 03°50'41\" WEST",
+      "description": null,
+      "distance": 124.18,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": {
+        "bearing": "NORTH 74°23'15\" WEST",
+        "distance": 17.21,
+        "unit": "FEET",
+        "monument": "2\" ALUMINUM DISK STAMPED \"WIER & ASSOC INC\" FOUND"
+      }
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 12°37'12\" WEST",
+      "description": null,
+      "distance": 57.37,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 76°39'41\" EAST",
+      "description": null,
+      "distance": 14.48,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 13°02'18\" WEST",
+      "description": null,
+      "distance": 98.19,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 76°39'41\" EAST",
+      "description": null,
+      "distance": 15.85,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 13°20'19\" WEST",
+      "description": null,
+      "distance": 35.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": "BEGINNING OF A CURVE TO THE RIGHT",
+      "callType": "curve",
+      "bearing": null,
+      "description": null,
+      "distance": null,
+      "unit": null,
+      "angle": null,
+      "monument": null,
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "curve",
+      "bearing": "NORTH 09°40'44\" WEST",
+      "description": null,
+      "distance": 116.37,
+      "unit": "FEET",
+      "angle": "08°33'21\"",
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 01°58'33\" WEST",
+      "description": null,
+      "distance": 764.88,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "1\" IRON PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 06°17'26\" WEST",
+      "description": null,
+      "distance": 24.09,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 78°49'04\" EAST",
+      "description": null,
+      "distance": 15.75,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": {
+        "bearing": "NORTH 11°10'56\" WEST",
+        "distance": 33.31,
+        "unit": "FEET",
+        "monument": "1/2\" IRON ROD FOUND"
+      }
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 11°10'56\" EAST",
+      "description": null,
+      "distance": 458.25,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" ALUMINUM DISK STAMPED \"WIER & ASSOC INC\" FOUND IN THE SOUTH RIGHT- OF-WAY LINE OF HORTON STREET (A CALLED 30' WIDE RIGHT-OF-WAY)",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 88°26'23\" EAST",
+      "description": null,
+      "distance": 47.32,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 02°14'09\" EAST",
+      "description": null,
+      "distance": 199.22,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT IN THE SOUTH RIGHT-OF-WAY LINE OF SAID HORTON STREET",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 88°20'13\" EAST",
+      "description": null,
+      "distance": 193.23,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 01°58'42\" EAST",
+      "description": null,
+      "distance": 423.68,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT IN THE SOUTH RIGHT-OF-WAY LINE OF TAYLOR STREET (A CALLED 30' WIDE RIGHT-OF-WAY)",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 88°24'26\" EAST",
+      "description": null,
+      "distance": 154.53,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 01°38'03\" EAST",
+      "description": null,
+      "distance": 150.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 88°21'57\" EAST",
+      "description": null,
+      "distance": 50.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT IN THE EAST RIGHT- OF-WAY LINE OF SAID EVANS STREET",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 01°38'03\" WEST",
+      "description": null,
+      "distance": 150.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 88°21'57\" EAST",
+      "description": "ALONG THE SOUTH RIGHT-OF-WAY LINE OF SAID TAYLOR STREET",
+      "distance": 295.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 01°38'03\" EAST",
+      "description": "ALONG THE WEST RIGHT-OF-WAY LINE OF SAID ELMO STREET",
+      "distance": 25.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": {
+        "bearing": "SOUTH 33°37' WEST",
+        "distance": 18.0,
+        "unit": "FEET",
+        "monument": "\"X\" CUT FOUND"
+      }
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 59°55'34\" WEST",
+      "description": "ALONG THE NORTHWEST RIGHT-OF-WAY LINE OF SAID BOONE STREET",
+      "distance": 215.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 77°48'01\" EAST",
+      "description": "DEPARTING THE NORTHWEST RIGHT-OF-WAY LINE OF SAID BOONE STREET",
+      "distance": 74.33,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 59°55'34\" EAST",
+      "description": "ALONG THE SOUTHEAST RIGHT-OF-WAY LINE OF SAID BOONE STREET",
+      "distance": 154.09,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 29°33'03\" EAST",
+      "description": "ALONG THE SOUTHWEST RIGHT-OF-WAY LINE OF SAID SABINE AVENUE",
+      "distance": 860.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "1/2\" IRON ROD FOUND",
+      "pointOfReference": {
+        "bearing": "SOUTH 34°15' WEST",
+        "distance": 0.2,
+        "unit": "FEET",
+        "monument": "1/2\" IRON ROD FOUND"
+      }
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 59°59'58\" WEST",
+      "description": "DEPARTING THE SOUTHWEST RIGHT-OF-WAY LINE OF SAID SABINE AVENUE",
+      "distance": 139.93,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 87°08'04\" WEST",
+      "description": null,
+      "distance": 631.89,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" IRON PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 25°49'40\" EAST",
+      "description": null,
+      "distance": 1137.97,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "1/2\" IRON ROD FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 30°37'11\" EAST",
+      "description": null,
+      "distance": 89.71,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "1/2\" IRON ROD FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 67°00'40\" EAST",
+      "description": null,
+      "distance": 338.74,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 13°07'41\" EAST",
+      "description": null,
+      "distance": 468.48,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 10°01'59\" WEST",
+      "description": null,
+      "distance": 64.09,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 13°34'45\" EAST",
+      "description": null,
+      "distance": 1102.8,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND IN THE SOUTH RIGHT-OF-WAY LINE OF CLEBURNE STREET (A CALLED 50' WIDE RIGHT-OF-WAY)",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 76°25'15\" EAST",
+      "description": "ALONG THE SOUTH RIGHT-OF-WAY LINE OF SAID CLEBURNE STREET",
+      "distance": 132.94,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND, BEING THE INTERSECTION OF THE SOUTH RIGHT-OF-WAY LINE OF SAID CLEBURNE STREET WITH THE WEST RIGHT-OF-WAY LINE OF SAID BRAZOS STREET",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 13°35'20\" EAST",
+      "description": "ALONG THE WEST RIGHT-OF-WAY LINE OF SAID BRAZOS STREET",
+      "distance": 50.0,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "POINT",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 76°25'15\" WEST",
+      "description": "DEPARTING THE WEST RIGHT-OF-WAY LINE OF SAID BRAZOS STREET",
+      "distance": 132.95,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 13°34'45\" EAST",
+      "description": "AT A DISTANCE OF 148.47 FEET, PASSING A 2\" GALVANIZED PIPE FOUND IN THE NORTH RIGHT-OF-WAY LINE OF PARK STREET (A CALLED 50' WIDE RIGHT-OF-WAY), CONTINUING IN ALL A TOTAL DISTANCE OF 199.01 FEET",
+      "distance": 199.01,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "1\" IRON PIPE FOUND IN THE SOUTH RIGHT-OF-WAY LINE OF SAID PARK STREET",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "NORTH 76°46'42\" EAST",
+      "description": "ALONG THE SOUTH RIGHT-OF-WAY LINE OF SAID PARK STREET",
+      "distance": 133.16,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "2\" GALVANIZED PIPE FOUND AT THE INTERSECTION OF THE SOUTH RIGHT-OF-WAY LINE OF SAID PARK STREET WITH THE WEST RIGHT-OF-WAY LINE OF SAID BRAZOS STREET",
+      "pointOfReference": null
+    },
+    {
+      "locationDescription": null,
+      "callType": "line",
+      "bearing": "SOUTH 13°34'24\" EAST",
+      "description": "ALONG THE WEST RIGHT-OF-WAY LINE OF SAID BRAZOS STREET",
+      "distance": 504.89,
+      "unit": "FEET",
+      "angle": null,
+      "monument": "PLACE OF BEGINNING",
+      "pointOfReference": null
+    }
+  ]
+}
