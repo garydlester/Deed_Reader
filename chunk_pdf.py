@@ -8,114 +8,250 @@ from openai import OpenAI
 
 from schema_function import EXTRACT_METES_BOUNDS_SCHEMA, SYSTEM_PROMPT_LINES
 
-def format_bearing(bearing_str):
-    # case-insensitive regex to grab dir1, deg, min, sec, dir2
-    pattern = re.compile(
-        r"^\s*"
-        r"(?P<dir1>north|south)\s+"              # N or S word
-        r"(?P<deg>\d+)\s*(?:°|degrees?)\s+"
-        r"(?P<min>\d+)\s*(?:'|minutes?)\s+"
-        r"(?P<sec>\d+)\s*(?:\"|seconds?)\s+"
-        r"(?P<dir2>east|west)\s*"
-        r"$",
-        flags=re.IGNORECASE
-    )
-    m = pattern.match(bearing_str)
-    if not m:
-        # fallback: if it doesn’t match, just return the original
+def format_bearing(bearing_str: str) -> str:
+    """
+    Normalizes many OCR/format variants into:  N 32°44'45" W
+    Fixes:
+      - N 32"44'35" W      -> N 32°44'35" W
+      - N 32'44'45" W      -> N 32°44'45" W
+      - N41'44'55"W        -> N 41°44'55" W
+      - N34'45'W           -> N 34°45'00" W
+      - S. 15'29'56' E     -> S 15°29'56" E
+      - S. 74:34'W, S 74:34 W -> S 74°34'00" W
+      - SOUTH 39'01'15" CAST -> S 39°01'15" E
+      - Worded units incl. typos (DEUREES/MINUTES/SECONDS)
+    Enforces bearings <= 90°00'00" by “defusing” concatenated degree digits:
+      e.g. N 145°0'28" W -> N 14°50'28" W
+    """
+    if not bearing_str or not bearing_str.strip():
         return bearing_str
 
-    # map any case-variant to its initial
-    abbrev = {"north": "N", "south": "S", "east": "E", "west": "W"}
-    d1 = abbrev[m.group("dir1").lower()]
-    d2 = abbrev[m.group("dir2").lower()]
+    s = bearing_str
 
-    deg = m.group("deg")
-    minute = m.group("min")
-    sec = m.group("sec")
+    # Normalize quotes to ASCII and strip trailing punctuation
+    s = (s.replace("’", "'").replace("′", "'")
+           .replace("“", '"').replace("”", '"'))
+    s = re.sub(r"[\s,;:\.\)\]]+$", "", s)
 
-    return f"{d1} {deg}°{minute}'{sec}\" {d2}"
+    # OCR direction words & common typo CAST -> E ; full words -> letters
+    def dir_fix(m):
+        w = m.group(0).upper()
+        return {"NORTH":"N","SOUTH":"S","EAST":"E","WEST":"W","CAST":"E"}.get(w, m.group(0))
+    s = re.sub(r"\b(NORTH|SOUTH|EAST|WEST|CAST)\b", dir_fix, s, flags=re.IGNORECASE)
+
+    # Worded units (with OCR typos) -> symbols
+    s = re.sub(r"\b(\d+)\s*(?:deg(?:ree|rees)?|degre?s|deqrees|deurees)\b", r"\1°", s, flags=re.IGNORECASE)
+    s = re.sub(r"\b(\d+)\s*(?:minute|minutes|min(?:ute)?s?)\b", r"\1'", s, flags=re.IGNORECASE)
+    s = re.sub(r"\b(\d+)\s*(?:second|seconds|sec(?:ond)?s?)\b", r'\1"', s, flags=re.IGNORECASE)
+
+    # Handle colon styles: N. 41:44:55 W  → N 41°44'55" W
+    s = re.sub(r"^\s*([NnSs])\.?\s*(\d+)\s*:\s*(\d+)\s*:\s*(\d+)\s*([EeWw])\.?\s*$",
+               lambda m: f"{m.group(1).upper()} {m.group(2)}°{m.group(3)}'{m.group(4)}\" {m.group(5).upper()}",
+               s)
+    # Colon with no seconds: S. 74:34'W / S 74:34 W → S 74°34'00" W
+    s = re.sub(r"^\s*([NnSs])\.?\s*(\d+)\s*:\s*(\d+)\s*'?[\s]*([EeWw])\.?\s*$",
+               lambda m: f"{m.group(1).upper()} {m.group(2)}°{m.group(3)}'00\" {m.group(4).upper()}",
+               s)
+
+    # Apostrophes everywhere: S. 15'29'56' E → S 15°29'56" E
+    s = re.sub(r"^\s*([NnSs])\.?\s*(\d+)'(\d+)'(\d+)'?\s*([EeWw])\.?\s*$",
+               lambda m: f"{m.group(1).upper()} {m.group(2)}°{m.group(3)}'{m.group(4)}\" {m.group(5).upper()}",
+               s)
+
+    # Deg+Min only with apostrophes: N34'45'W / N 34'45' W → N 34°45'00" W
+    s = re.sub(r"^\s*([NnSs])\s*(\d+)'(\d+)'\s*([EeWw])\s*$",
+               lambda m: f"{m.group(1).upper()} {m.group(2)}°{m.group(3)}'00\" {m.group(4).upper()}",
+               s)
+
+    # Compact no-space: N41'44'55"W → N 41°44'55" W
+    s = re.sub(r"^\s*([NnSs])\s*(\d+)'(\d+)'(\d+)(?:\")?\s*([EeWw])\s*$",
+               lambda m: f"{m.group(1).upper()} {m.group(2)}°{m.group(3)}'{m.group(4)}\" {m.group(5).upper()}",
+               s)
+
+    # Misplaced " used as degrees, or ' used as degrees (before a proper pattern)
+    s = re.sub(r'(\d+)"(?=\s*\d+\'\d+"?\s*[EW])', r"\1°", s, flags=re.IGNORECASE)
+    s = re.sub(r"(\d+)'(?=\s*\d+'\d+\"?\s*[EW])", r"\1°", s, flags=re.IGNORECASE)
+
+    # Ensure a space before trailing E/W if it's glued: …55"W → …55" W
+    s = re.sub(r'(\d)"\s*([EW])\s*$', r'\1" \2', s, flags=re.IGNORECASE)
+
+    # Final parse (accept words or symbols, optional minutes/seconds)
+    rx = re.compile(r"""
+        ^\s*
+        (?P<dir1>N|S|north|south)\s*
+        (?P<deg>\d+(?:\.\d+)?)\s*(?:°|degrees?)?
+        (?:\s*(?P<min>\d+(?:\.\d+)?)\s*(?:'|minutes?)?)?
+        (?:\s*(?P<sec>\d+(?:\.\d+)?)\s*(?:"|seconds?)?)?
+        \s*(?P<dir2>E|W|east|west)
+        \s*$
+    """, re.IGNORECASE | re.VERBOSE)
+
+    m = rx.match(s)
+    if not m:
+        return s.strip()
+
+    def abbr(t):
+        t = t.lower()
+        return "N" if t.startswith("n") else "S" if t.startswith("s") else "E" if t.startswith("e") else "W"
+    d1 = abbr(m.group("dir1"))
+    d2 = abbr(m.group("dir2"))
+
+    def to_int(v):
+        if not v: return 0
+        try: return int(float(v))
+        except: 
+            mm = re.search(r"\d+", v)
+            return int(mm.group(0)) if mm else 0
+
+    deg = to_int(m.group("deg"))
+    minu = to_int(m.group("min") or "0")
+    sec  = to_int(m.group("sec") or "0")
+
+    # Enforce ≤90°: defuse concatenated degree digits if needed
+    if deg > 90:
+        ds = str(deg)
+        if len(ds) >= 2:
+            last = int(ds[-1])
+            deg = int(ds[:-1])
+            minu += last * 10
+
+    # Normalize overflow
+    if sec >= 60:
+        minu += sec // 60
+        sec  %= 60
+    if minu >= 60:
+        deg  += minu // 60
+        minu %= 60
+    if deg > 90:
+        deg, minu, sec = 90, 0, 0
+
+    return f'{d1} {deg}°{minu:02d}\'{sec:02d}" {d2}'
+
+# ------------------ Deed cleaning ------------------
+
+_LATLON_DMS = re.compile(
+    r"""\b
+        (?:N|S)\s*\d{1,3}°\s*\d{1,2}'\s*\d{1,2}(?:\.\d+)?"
+        \s*
+        (?:E|W)\s*\d{1,3}°\s*\d{1,2}'\s*\d{1,2}(?:\.\d+)?"
+    \b""", re.IGNORECASE | re.VERBOSE)
+
+_LATLON_DEC = re.compile(
+    r"""\b
+        (?:N|S)\s*-?\d{1,3}(?:\.\d+)?\s*°?
+        \s*
+        (?:E|W)\s*-?\d{1,3}(?:\.\d+)?\s*°?
+    \b""", re.IGNORECASE | re.VERBOSE)
 
 
-def clean_deed_text(text):
-    # 1) Remove repeated headers/footers
-    text = re.sub(
-        r"Texas Department of Transportation.*?Page\s*\d+\s*of\s*\d+",
-        "",
-        text,
-        flags=re.IGNORECASE
-    )
+def _shield_latlon(text: str) -> tuple[str, dict[int, str]]:
+    """Replace lat/long pairs with placeholders to avoid being split or rewritten."""
+    repl = {}
+    idx = 0
 
-    # 2) Drop standalone “EXHIBIT” markers
+    def subfn(pattern, t):
+        nonlocal idx
+        def _r(m):
+            nonlocal idx
+            tag = f"__LL_PLACEHOLDER_{idx}__"
+            repl[idx] = m.group(0)
+            idx += 1
+            return tag
+        return pattern.sub(_r, t)
+
+    text = subfn(_LATLON_DMS, text)
+    text = subfn(_LATLON_DEC, text)
+    return text, repl
+
+
+def _unshield_latlon(text: str, repl: dict[int, str]) -> str:
+    for k, v in repl.items():
+        text = text.replace(f"__LL_PLACEHOLDER_{k}__", v)
+    return text
+
+
+def clean_deed_text(text: str) -> str:
+    """
+    Cleans raw deed text:
+      - remove headers/footers, EXHIBIT, Windows paths, stray asterisks
+      - insert newlines before THENCE
+      - split bearing/distance clauses onto separate lines
+      - avoid touching coordinate pairs like N: 12345, E: 67890 and lat/long pairs
+      - collapse whitespace
+    """
+    if not text:
+        return text
+
+    # Shield lat/long pairs so we don't split inside them
+    text, saved_coords = _shield_latlon(text)
+
+    # 1) Remove repeated headers/footers “Texas Department of Transportation ... Page X of Y”
+    text = re.sub(r"Texas Department of Transportation.*?Page\s*\d+\s*of\s*\d+",
+                  "", text, flags=re.IGNORECASE | re.DOTALL)
+
+    # 2) Drop standalone “EXHIBIT”
     text = re.sub(r"\bEXHIBIT\b", "", text, flags=re.IGNORECASE)
 
-    # 3) Remove Windows‑style file paths
-    text = re.sub(
-        r"[A-Za-z]:\\(?:[^\s\\]+\\)*[^\s\\]+",
-        "",
-        text
-    )
+    # 3) Remove Windows paths like K:\PROJ\...
+    text = re.sub(r"[A-Za-z]:\\(?:[^\s\\]+\\)*[^\s\\]+", "", text)
 
     # 4) Strip stray asterisks
     text = re.sub(r"\*+", "", text)
 
-    # 5) Newline before each “THENCE”
-    text = re.sub(r"(?i)\bTHENCE\b", r"\nTHENCE", text)
+    # Normalize quotes to ASCII
+    text = (text.replace("’", "'").replace("′", "'")
+                .replace("“", '"').replace("”", '"'))
 
-    # 5.1) Break out each bearing‑distance clause onto its own line
-    pattern = re.compile(r"""
-        [\:\.,]\s*                                  # leading colon, comma or period + spaces
-        (                                           # capture the bearing+distance clause
-          (?:N|S|E|W|North|South|East|West)
-          \s*(?:[0-9]|[1-8]\d|90)\s*(?:°|degrees?)\s*
-          (?:[0-5]?\d)\s*(?:'|minutes?)\s*
-          (?:[0-5]?\d)\s*(?:"|seconds?)\s*
+    # 5) Newline before each THENCE (case-insensitive)
+    text = re.sub(r"(?i)\bTHENCE\b", "\nTHENCE", text)
+
+    # 5.1) Break bearing-distance clauses onto their own line.
+    #      Accept symbols or words; allow colon styles; optional trailing distance clause.
+    bearing_clause = re.compile(r"""
+        [\:\.,]\s*                                  # leading punctuation + spaces
+        (                                           # capture the clause
+          (?:N|S|E|W|North|South|East|West)\.?\s*
+          (?:\d{1,2}|[1-8]\d|90)\s*(?:°|degrees?)?\s*
+          (?:
+              (?:[0-5]?\d)\s*(?:'|minutes?)\s*
+              (?:
+                 (?:[0-5]?\d)\s*(?:"|seconds?)      # with seconds
+              )?
+            |
+              :\s*[0-5]?\d(?:\s*:\s*[0-5]?\d)?      # colon styles: D:MM or D:MM:SS
+          )\s*
           (?:E|W|East|West)?
-          (?:                                       # optional distance clause
-            \s*,?\s*a\s*distance\s*of\s*,?\s*
-            \d+(?:\.\d+)?\s*(?:feet|chains)
-          )?
+          (?:\s*,?\s*a\s*distance\s*of\s*,?\s*\d+(?:\.\d+)?\s*(?:feet|chains))?
         )
-        (?=                                         # lookahead for punctuation or next bearing
+        (?=                                         # next delimiter or next bearing
             [\:\.,\s]*(?:N|S|E|W|North|South|East|West)\b
           | [\:\.,]
         )
-        """,
-        flags=re.IGNORECASE | re.VERBOSE
-    )
-    text = pattern.sub(lambda m: f", {m.group(1)},\n", text)
+    """, re.IGNORECASE | re.VERBOSE)
+    text = bearing_clause.sub(lambda m: f", {m.group(1)},\n", text)
 
-    # 6) Replace any leading punctuation+space at start‐of‐line with “THENCE ”,
-    #    but skip if it's a coordinate that starts “N:” or “E:” etc.
+    # 6) Replace any leading punctuation at start-of-line with "THENCE ",
+    #    skipping coordinates like "N:" / "E:" northings/eastings.
+    text = re.sub(r'(?m)^[\:\.,]\s*(?!(?:[NSEW]:))', 'THENCE ', text)
+
+    # 7) Insert newline before punctuation that precedes a bearing word/letter,
+    #    but skip when it's a coordinate (N:123…)
     text = re.sub(
-        r'(?m)^[\:\.,]\s*(?!(?:[NSEW]:))',   # NEGATIVE lookahead for N: / E: coordinate
-        'THENCE ',
-        text
+        r'([,.:])\s*(?=(?:N(?!:)|S(?!:)|E(?!:)|W(?!:)|North(?!:)|South(?!:)|East(?!:)|West(?!:))\b)',
+        r'\1\n', text, flags=re.IGNORECASE
     )
 
-    # 7) Collapse multiple spaces
-    text = re.sub(r"\s{2,}", " ", text).strip()
-
-    # 8) Insert newline before any comma/colon/period that precedes a bearing,
-    #    but skip when that bearing is actually a coordinate (N:123,…)
-    text = re.sub(
-        r'([,.:])\s*'                                     
-        r'(?=(?:N(?!:)|S(?!:)|E(?!:)|W(?!:)|North(?!:)|South(?!:)|East(?!:)|West(?!:))\b)',
-        r'\1\n',
-        text,
-        flags=re.IGNORECASE
-    )
-
-    # 9) Prefix any line now starting with a compass direction with “THENCE ”,
-    #    again skipping coordinate pairs
+    # 8) Ensure lines that start with a compass direction begin with "THENCE "
     text = re.sub(
         r'(?m)^(?=\s*(?:N(?!:)|S(?!:)|E(?!:)|W(?!:)|North(?!:)|South(?!:)|East(?!:)|West(?!:))\b)',
-        'THENCE ',
-        text
+        'THENCE ', text
     )
 
+    # 9) Collapse whitespace
     text = re.sub(r"\s{2,}", " ", text).strip()
 
+    # Unshield lat/long pairs
+    text = _unshield_latlon(text, saved_coords)
     return text
 
 
@@ -147,7 +283,7 @@ def pdf_to_images(path, dpi=300):
         images.append(pix.tobytes("png"))
     return images
 
-metes = os.path.join(os.path.dirname(__file__), "1194_995_TrucksAndStuffs/NM-ED-00022.00081 .pdf")
+metes = os.path.join(os.path.dirname(__file__), r"Title\UPSEG2 - West Texas Land & Water LLC\West Texas Land & Water LLC\2024-10288_ROW_SEC 23.pdf")
 
 open_client = OpenAI(api_key="")
 
@@ -242,6 +378,7 @@ def main():
         "prompt":     full_prompt,
         "completion": json.dumps({"segments": all_segments}, ensure_ascii=False)
     }
+
     with open("output.json", "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
